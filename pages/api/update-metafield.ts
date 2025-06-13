@@ -34,6 +34,7 @@ export default async function handler(
     'under30_d_birth',
   ];
   const valueTypes = {
+    'birth_date': 'date',
     'age': "number_integer",
     'under30_a': 'single_line_text_field', 
     'under30_a_relationship': 'list.single_line_text_field',
