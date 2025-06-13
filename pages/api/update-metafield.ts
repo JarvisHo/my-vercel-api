@@ -131,23 +131,23 @@ export default async function handler(
       let valueType = (valueTypes as Record<string, string>)[key] || 'single_line_text_field';
       let metafieldValue: string = valueObj[key];
       // 特殊處理 birth_date
-      if (key === 'birth_date') {
-        metafieldKey = 'age';
-        valueType = 'number_integer';
-        // 計算年齡（同樣以 4/1 為分界）
-        const birthDate = new Date(metafieldValue);
-        const today = new Date();
-        const thisYear = today.getFullYear();
-        const borderMonth = 3; // 4月
-        const borderDay = 1;
-        const borderDate = new Date(thisYear, borderMonth, borderDay);
-        let age = thisYear - birthDate.getFullYear();
-        const birthThisYear = new Date(thisYear, birthDate.getMonth(), birthDate.getDate());
-        if (birthThisYear > borderDate) {
-          age--;
-        }
-        metafieldValue = age.toString();
-      }
+      // if (key === 'birth_date') {
+      //   metafieldKey = 'age';
+      //   valueType = 'number_integer';
+      //   // 計算年齡（同樣以 4/1 為分界）
+      //   const birthDate = new Date(metafieldValue);
+      //   const today = new Date();
+      //   const thisYear = today.getFullYear();
+      //   const borderMonth = 3; // 4月
+      //   const borderDay = 1;
+      //   const borderDate = new Date(thisYear, borderMonth, borderDay);
+      //   let age = thisYear - birthDate.getFullYear();
+      //   const birthThisYear = new Date(thisYear, birthDate.getMonth(), birthDate.getDate());
+      //   if (birthThisYear > borderDate) {
+      //     age--;
+      //   }
+      //   metafieldValue = age.toString();
+      // }
       if (key.endsWith('_relationship')) {
         // 若值為空字串，存成空陣列
         if (!metafieldValue) {
