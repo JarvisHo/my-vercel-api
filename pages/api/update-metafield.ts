@@ -168,7 +168,7 @@ export default async function handler(
       }
       const metafieldPayload = {
         metafield: {
-          namespace: metafieldKey === 'birth_date' ? 'facts' : 'custom',
+          namespace: metafieldKey === 'self_birth_date' ? 'facts' : 'custom',
           key: metafieldKey,
           value: metafieldValue,
           type: valueType,
