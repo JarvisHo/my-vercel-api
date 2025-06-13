@@ -128,10 +128,10 @@ export default async function handler(
   // 並行更新所有存在的欄位到 metafield
   await Promise.all(
     Object.keys(valueObj).map(async (key) => {
-      let metafieldKey = key;
-      let valueType = (valueTypes as Record<string, string>)[key] || 'single_line_text_field';
+      const metafieldKey = key;
+      const valueType = (valueTypes as Record<string, string>)[key] || 'single_line_text_field';
       let metafieldValue: string = valueObj[key];
-      // 特殊處理 birth_date
+      // 特殊処理 birth_date
       // if (key === 'birth_date') {
       //   metafieldKey = 'age';
       //   valueType = 'number_integer';
@@ -161,12 +161,10 @@ export default async function handler(
         (metafield: { namespace: string; key: string; id: string }) => metafield.namespace === namespace && metafield.key === metafieldKey
       );
       const metafieldId = existingMetafield?.id;
-      let url = `https://${SHOPIFY_SHOP_DOMAIN}/admin/api/2025-04/customers/${customerId}/metafields.json`;
-      let method = 'POST';
-      if (metafieldId) {
-        url = `https://${SHOPIFY_SHOP_DOMAIN}/admin/api/2025-04/metafields/${metafieldId}.json`;
-        method = 'PUT';
-      }
+      const url = metafieldId 
+        ? `https://${SHOPIFY_SHOP_DOMAIN}/admin/api/2025-04/metafields/${metafieldId}.json`
+        : `https://${SHOPIFY_SHOP_DOMAIN}/admin/api/2025-04/customers/${customerId}/metafields.json`;
+      const method = metafieldId ? 'PUT' : 'POST';
       const metafieldPayload = {
         metafield: {
           namespace: metafieldKey === 'birth_date' ? 'facts' : 'custom',
